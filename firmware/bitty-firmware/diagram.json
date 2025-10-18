@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "author": "GitHub Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": -8,
+      "left": -16,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ssd1306",
+      "id": "oled",
+      "top": -165,
+      "left": 200,
+      "attrs": {"i2cAddress": "0x3C"}
+    },
+    {
+      "type": "wokwi-apds9960",
+      "id": "gesture",
+      "top": -160,
+      "left": -220,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": 160,
+      "left": 200,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_left",
+      "top": 180,
+      "left": -240,
+      "attrs": {"horn": "double"}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_right",
+      "top": 250,
+      "left": -120,
+      "attrs": {"horn": "double"}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_head",
+      "top": 320,
+      "left": -240,
+      "attrs": {"horn": "double"}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_body",
+      "top": 390,
+      "left": -120,
+      "attrs": {"horn": "double"}
+    },
+    {
+      "type": "wokwi-capacitor",
+      "id": "cap",
+      "top": 80,
+      "left": 60,
+      "attrs": {"value": "1000uF"}
+    }
+  ],
+  "connections": [
+    ["esp:3V3", "oled:VCC", "red"],
+    ["esp:GND.1", "oled:GND", "black"],
+    ["esp:21", "oled:SDA", "green"],
+    ["esp:22", "oled:SCL", "blue"],
+
+    ["esp:3V3", "gesture:VCC", "red"],
+    ["esp:GND.2", "gesture:GND", "black"],
+    ["esp:21", "gesture:SDA", "green"],
+    ["esp:22", "gesture:SCL", "blue"],
+    ["esp:4", "gesture:INT", "orange"],
+
+    ["esp:3V3", "dht:VCC", "red"],
+    ["esp:GND.3", "dht:GND", "black"],
+    ["esp:27", "dht:DATA", "yellow"],
+
+    ["esp:5V", "servo_left:V+", "red"],
+    ["esp:GND.4", "servo_left:GND", "black"],
+    ["esp:32", "servo_left:PWM", "purple"],
+
+    ["esp:5V", "servo_right:V+", "red"],
+    ["servo_left:GND", "servo_right:GND", "black"],
+    ["esp:33", "servo_right:PWM", "purple"],
+
+    ["servo_right:V+", "servo_head:V+", "red"],
+    ["servo_right:GND", "servo_head:GND", "black"],
+    ["esp:25", "servo_head:PWM", "purple"],
+
+    ["servo_head:V+", "servo_body:V+", "red"],
+    ["servo_head:GND", "servo_body:GND", "black"],
+    ["esp:26", "servo_body:PWM", "purple"],
+
+    ["esp:5V", "cap:1", "red"],
+    ["esp:GND.5", "cap:2", "black"]
+  ]
+}

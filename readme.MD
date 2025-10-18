@@ -1,150 +1,150 @@
  
-# 🤖 Bit-Ty: Rencana Proyek Asisten Desktop Interaktif
+# 🤖 Bit-Ty: Interactive Desktop Assistant Project Plan
 
-![Status Proyek](https://img.shields.io/badge/status-Perencanaan-blue)
+![Project Status](https://img.shields.io/badge/status-Planning-blue)
 
-Selamat datang di repositori **Bit-Ty**! Ini adalah dokumen perencanaan untuk membuat robot asisten desktop interaktif DIY. Dokumen ini menguraikan ide, arsitektur yang diusulkan, dan komponen yang direncanakan untuk proyek ini.
-
----
-
-## 💡 Ide & Tujuan Utama
-
-Tujuan proyek ini adalah merancang dan membangun **Bit-Ty**, sebuah robot kecil yang diletakkan di meja untuk berinteraksi dengan desktop/laptop.
-
-**Prinsip Desain Utama:**
-1.  **Kenyamanan Pengguna:** Robot harus terhubung ke laptop hanya dengan **satu kabel USB**.
-2.  **Stabilitas:** Koneksi harus stabil tanpa mengorbankan fungsionalitas.
-3.  **Responsif:** Robot harus memberikan umpan balik instan, baik secara fisik maupun digital.
-
-Bit-Ty akan berfungsi sebagai "teman" fisik untuk komputermu, mampu mengekspresikan "emosi", merespon sentuhan gestur, dan bahkan membantumu mengontrol volume secara fisik.
+Welcome to the **Bit-Ty** repository! This is a planning document for building a DIY interactive desktop assistant robot. It outlines the idea, proposed architecture, and planned components for the project.
 
 ---
 
-## ✨ Fitur yang Direncanakan
+## 💡 Idea & Primary Goals
 
-* **Ekspresi Wajah:** Menampilkan berbagai ekspresi di layar OLED.
-* **Kontrol Gestur:** Menggunakan sensor APDS-9960 untuk mendeteksi gestur (geser kanan/kiri/atas/bawah) yang akan dipetakan ke *shortcut* OS (misal: Alt+Tab).
-* **Kontrol Volume Fisik:** Sebuah fitur unik di mana servo tangan "di-hack" untuk membaca putaran manual dari pengguna, yang kemudian diterjemahkan menjadi kontrol volume desktop.
-* **Monitoring Suhu:** Membaca dan menampilkan suhu ruangan saat ini via DHT11.
-* **Perintah Suara:** Implementasi *Keyword Spotting* (KWS) di ESP32. Setelah kata kunci terdeteksi, audio akan di-stream ke desktop untuk diproses lebih lanjut (ASR).
-* **4-Axis Gerakan:** Memiliki 4 servo (2 tangan, 1 kepala, 1 badan) untuk gerakan yang ekspresif.
+The goal of this project is to design and build **Bit-Ty**, a small robot that sits on your desk and interacts with your desktop/laptop.
+
+**Core Design Principles:**
+1.  **User Convenience:** The robot must connect to the laptop with a **single USB cable**.
+2.  **Stability:** The connection must be stable without sacrificing functionality.
+3.  **Responsiveness:** The robot should provide instant feedback, both physically and digitally.
+
+Bit-Ty acts as a physical “companion” for your computer, able to express “emotions,” respond to gesture touch, and even help you control system volume physically.
 
 ---
 
-## 🛠️ Rencana Tech Stack
+## ✨ Planned Features
+
+* **Facial Expressions:** Display various expressions on an OLED screen.
+* **Gesture Control:** Use an APDS-9960 sensor to detect gestures (swipe right/left/up/down) mapped to OS shortcuts (e.g., Alt+Tab).
+* **Physical Volume Control:** A unique feature where a hand servo is “hacked” to read manual rotation from the user, which is then translated into desktop volume control.
+* **Temperature Monitoring:** Read and display the current room temperature via DHT11.
+* **Voice Commands:** Implement on-device Keyword Spotting (KWS) on the ESP32. After the keyword is detected, audio is streamed to the desktop for further processing (ASR).
+* **4-Axis Motion:** Four servos (2 arms, 1 head, 1 body) for expressive movement.
+
+---
+
+## 🛠️ Tech Stack (Planned)
 
 * **Firmware (Robot):** **C++** (Arduino Framework)
 * **Backend (Desktop):** **Python** & **Flask**
-* **Frontend (Desktop):** **Electron** (sebagai *wrapper* aplikasi)
-* **UI (Frontend):** **Next.js** (diekspor sebagai file statis)
+* **Frontend (Desktop):** **Electron** (as an application wrapper)
+* **UI (Frontend):** **Next.js** (exported as static files)
 
 ---
 
-## 🏗️ Arsitektur yang Diusulkan
+## 🏗️ Proposed Architecture
 
-Arsitektur Bit-Ty dirancang untuk dua hal: **stabilitas daya** dan **koneksi data yang responsif**.
+Bit-Ty’s architecture is built around two priorities: **power stability** and **responsive data connectivity**.
 
-### 1. Arsitektur Fisik & Power (Satu Kabel)
+### 1. Physical & Power Architecture (Single Cable)
 
-Rancangan ini sengaja menghindari *buck converter* atau kebutuhan dua kabel.
-* **Sumber:** 1x Port USB Laptop.
-* **Fungsi Kabel:** Kabel USB ini akan membawa **Power (5V)** dan **Data (Serial)** sekaligus.
-* **Stabilizer (Krusial!):** Sebuah **Kapasitor 1000µF** (atau lebih besar) akan dipasang paralel di jalur 5V dan GND. Ini berfungsi sebagai "ember" penampung daya untuk menangani **lonjakan arus (peak current)** dari servo, mencegah ESP32 dari *brownout* atau *restart*.
+This design intentionally avoids a buck converter or the need for two cables.
+* **Source:** 1x Laptop USB port.
+* **Cable Function:** The USB cable carries both **Power (5V)** and **Data (Serial)**.
+* **Stabilizer (Critical!):** A **1000µF capacitor** (or larger) is placed in parallel across 5V and GND. It acts as a “bucket” to buffer **peak current** from servos, preventing the ESP32 from browning out or rebooting.
 
-### 2. Arsitektur Logika & Data (Serial-First)
+### 2. Logic & Data Architecture (Serial-First)
 
-Sistem ini akan memiliki 3 pemain utama yang berkomunikasi:
+The system has 3 primary actors:
 
-1.  **Frontend (UI Electron):** Ini adalah "wajah" aplikasi yang dilihat pengguna. Tugasnya hanya mengirim perintah (misal: "ubah ekspresi") ke Backend di `localhost`.
-2.  **Backend (Flask):** Ini adalah "otak" dan "jembatan" utama.
-    * Saat dimulai, Backend akan **mencari Bit-Ty di port Serial (USB)** terlebih dahulu.
-    * Jika ketemu, semua komunikasi akan super cepat via Serial (`pyserial`).
-    * Jika tidak ketemu (misal: kabel dicabut), dia akan beralih ke mode *fallback* dan **mencari Bit-Ty di jaringan WiFi**.
-    * Dia juga yang akan mengeksekusi *shortcut* OS (via `pyautogui`) saat menerima event gestur.
-3.  **Firmware (ESP32):** Ini adalah "pekerja".
-    * Di dalam `loop()`, dia akan selalu **mengecek koneksi Serial** terlebih dahulu.
-    * Jika Serial terhubung, semua data sensor (suhu, gestur) akan dikirim via `Serial.println()`.
-    * Jika Serial tidak terhubung, barulah dia mengaktifkan WiFi dan mengirim data via WebSocket.
+1.  **Frontend (Electron UI):** The “face” of the app seen by users. Its job is to send commands (e.g., “change expression”) to the Backend on `localhost`.
+2.  **Backend (Flask):** The “brain” and main “bridge.”
+    * On startup, the Backend **searches for Bit-Ty on a Serial (USB) port** first.
+    * If found, all communication is fast over Serial (`pyserial`).
+    * If not found (e.g., cable unplugged), it switches to a fallback mode and **searches for Bit-Ty over WiFi**.
+    * It also executes OS shortcuts (via `pyautogui`) when receiving gesture events.
+3.  **Firmware (ESP32):** The “worker.”
+    * In its `loop()`, it always **checks for a Serial connection** first.
+    * If Serial is connected, all sensor data (temperature, gestures) is sent via `Serial.println()`.
+    * If Serial is not connected, it enables WiFi and sends data via WebSocket.
 
 ---
 
-## 🔌 Rencana Komponen Hardware
+## 🔌 Planned Hardware Components
 
-| Kategori | Komponen | Catatan |
+| Category | Component | Notes |
 | :--- | :--- | :--- |
-| **MCU** | Wemos D1 Mini ESP32 | Otak utama (Dual-Core) |
-| **Servo** | 4x Servo (SG90) | 2 Tangan, 1 Kepala, 1 Badan |
-| **Layar** | OLED SSD106 (I2C) | Untuk ekspresi wajah |
-| **Sensor** | APDS-9960 (I2C) | Sensor gestur |
-| **Sensor** | DHT11 | Sensor suhu & kelembaban |
-| **Audio In** | INMP441 (I2S) | Microphone untuk KWS (Keyword Spotting)|
-| **Audio Out** | PAM8403 + Speaker | Untuk respon suara |
-| **Power** | **Kapasitor 1000µF 16V** | Penstabil daya servo |
+| **MCU** | Wemos D1 Mini ESP32 | Main controller (Dual-Core) |
+| **Servo** | 4x Servo (SG90) | 2 Arms, 1 Head, 1 Body |
+| **Display** | OLED SSD106 (I2C) | For facial expressions |
+| **Sensor** | APDS-9960 (I2C) | Gesture sensor |
+| **Sensor** | DHT11 | Temperature & humidity sensor |
+| **Audio In** | INMP441 (I2S) | Microphone for KWS (Keyword Spotting) |
+| **Audio Out** | PAM8403 + Speaker | For audio responses |
+| **Power** | **1000µF 16V Capacitor** | Servo power stabilizer |
 
 ---
 
-## 🔴 Prinsip Desain 🔴
+## 🔴 Design Principles (Must-Follow) 🔴
 
-Rencana ini hanya akan berhasil jika dua prinsip desain ini diikuti dengan ketat dalam implementasinya:
+This plan will only succeed if these two design principles are strictly followed in implementation:
 
-1.  **Pemasangan Kapasitor:** Kegagalan memasang kapasitor 1000µF akan membuat ESP32 *brownout* setiap kali servo bergerak. Ini adalah komponen non-opsional dalam desain ini.
-2.  **Manajemen Antrian Servo:** Karena keterbatasan daya USB, *firmware* **HARUS** diprogram untuk **tidak pernah** menggerakkan 2 servo atau lebih secara bersamaan. Harus ada sistem antrian (queue) untuk semua perintah gerak yang dieksekusi satu per satu. **Fitur "joged" (gerak bersamaan) sengaja ditiadakan demi stabilitas.**
+1.  **Capacitor Placement:** Failing to install the 1000µF capacitor will cause the ESP32 to brown out whenever a servo moves. This is a non-optional component in this design.
+2.  **Servo Queue Management:** Due to USB power limits, the firmware **MUST** be programmed to **never** move 2 or more servos simultaneously. There must be a queue for movement commands executed one-by-one. The “dance” (simultaneous movement) feature is intentionally omitted for stability.
 
 ---
 
-## 🗺️ Roadmap Implementasi
+## 🗺️ Implementation Roadmap
 
-- [ ] **Fase 1 – Prototipe Hardware Minimum:** Rangkaian servo, sensor, OLED, dan kapasitor 1000µF terpasang rapi di breadboard/chassis.
-- [ ] **Fase 2 – Firmware Serial-First:** Implementasi antrian servo, pembacaan sensor berkala, dan fallback WiFi sesuai diagram `diagram-serial-connection.svg`.
-- [ ] **Fase 3 – Backend & UI Desktop:** Flask mendeteksi Bit-Ty via serial, menyediakan WebSocket untuk Electron, serta memaparkan kontrol gestur/volume.
-- [ ] **Fase 4 – Pengalaman Pengguna & QA:** Penyempurnaan ekspresi, pemetaan gestur ke hotkey OS, pengujian stres daya dan long-run test.
+- [ ] **Phase 1 – Minimum Hardware Prototype:** Servos, sensors, OLED, and the 1000µF capacitor are neatly assembled on a breadboard/chassis.
+- [ ] **Phase 2 – Serial-First Firmware:** Implement servo queuing, periodic sensor reads, and WiFi fallback as shown in `diagram-serial-connection.svg`.
+- [ ] **Phase 3 – Backend & Desktop UI:** Flask detects Bit-Ty via serial, provides WebSocket for Electron, and exposes gesture/volume controls.
+- [ ] **Phase 4 – UX & QA:** Refine expressions, map gestures to OS hotkeys, perform power stress and long-run tests.
 
-Roadmap ini dapat diperluas dengan menandai status (`[x]`) setiap fase setelah selesai.
+This roadmap can be extended by marking (`[x]`) each phase as complete.
 
-## 🔄 Alur Sistem Interaktif
+## 🔄 Interactive System Flow
 
-Bit-Ty memiliki dua jalur interaksi utama antara pengguna, aplikasi desktop, dan robot fisik. Diagram kasarnya tersimpan di `/docs/diagram`.
+Bit-Ty has two main interaction paths between the user, desktop app, and the physical robot. The rough diagrams are stored under `/docs/diagram`.
 
-1. **User → Sistem:** Pengguna mengirim perintah melalui UI Electron, backend mengeksekusi perintah ke firmware, dan robot menyikapi secara fisik. Diagram lengkap: `diagram-user-to-system.svg`.
-2. **Sistem → User:** Perubahan sensor atau aksi otomatis robot diteruskan ke backend, lalu ditampilkan kembali sebagai feedback visual/OS. Diagram lengkap: `diagram-system-to-user.svg`.
+1. **User → System:** The user sends commands from the Electron UI; the backend executes commands to the firmware, and the robot reacts physically. Full diagram: `diagram-user-to-system.svg`.
+2. **System → User:** Sensor changes or robot-driven actions are forwarded to the backend and then surfaced as visual/OS feedback. Full diagram: `diagram-system-to-user.svg`.
 
-![Alur User ke Sistem](docs/diagram/diagram-user-to-system.svg)
+![User to System Flow](docs/diagram/diagram-user-to-system.svg)
 
-![Alur Sistem ke User](docs/diagram/diagram-system-to-user.svg)
+![System to User Flow](docs/diagram/diagram-system-to-user.svg)
 
-## 🔗 Logika Koneksi Serial-First
+## 🔗 Serial-First Connection Logic
 
-Prioritas koneksi dijelaskan di `diagram-serial-connection.svg` dan merangkum strategi berikut:
+The connection priority is described in `diagram-serial-connection.svg` and summarized as follows:
 
-- Backend selalu memindai port serial terlebih dahulu dan mengunci mode `SERIAL` saat Bit-Ty terdeteksi.
-- Jika serial gagal, backend menetapkan mode `WIFI` dan mencari Bit-Ty via mDNS sebagai fallback.
-- Firmware melakukan pengecekan `Serial.available()` di dalam `loop()`; jika tidak ada koneksi serial, barulah modul WiFi diaktifkan untuk mengirim data melalui WebSocket.
-- Seluruh telemetri sensor dikirim via `Serial.println()` saat kabel USB terhubung sehingga latensi tetap rendah.
+- The backend always scans serial ports first and locks into `SERIAL` mode when Bit-Ty is detected.
+- If serial fails, the backend sets `WIFI` mode and searches for Bit-Ty via mDNS as a fallback.
+- The firmware checks `Serial.available()` inside the `loop()`; if there is no serial connection, it enables WiFi and sends data via WebSocket.
+- All sensor telemetry is sent via `Serial.println()` when the USB cable is connected to keep latency low.
 
-## ⚡ Manajemen Daya & Distribusi Beban
+## ⚡ Power Management & Load Distribution
 
-Diagram `diagram-power-arcitecture.svg` mendokumentasikan strategi distribusi daya dari satu port USB:
+The `diagram-power-arcitecture.svg` documents the power distribution strategy from a single USB port:
 
-- Kabel USB tunggal memasok 5V dan data serial ke ESP32 (Wemos D1 Mini).
-- Kapasitor 1000µF paralel pada rel 5V menjadi penyangga lonjakan arus servo; komponen ini wajib.
-- Jalur PWM ke empat servo harus dijadwalkan bergantian untuk mencegah arus puncak simultan.
-- Sensor I2C/I2S (OLED, APDS-9960, DHT11, INMP441) serta amplifier PAM8403 berbagi sumber 5V yang distabilkan kapasitor.
-- Pertimbangkan uji beban bertahap: mulai dari satu servo bergerak, lalu tambah perangkat untuk memastikan port USB laptop tidak melebihi batas arus.
+- A single USB cable supplies 5V and serial data to the ESP32 (Wemos D1 Mini).
+- A 1000µF capacitor in parallel on the 5V rail buffers servo peak current; this component is mandatory.
+- PWM lines to the four servos must be scheduled alternately to prevent simultaneous peak currents.
+- I2C/I2S peripherals (OLED, APDS-9960, DHT11, INMP441) and the PAM8403 amplifier share the stabilized 5V source.
+- Consider staged load testing: start with one moving servo, then add peripherals to ensure the laptop USB port does not exceed current limits.
 
-## 🧪 Rencana Pengujian Awal
+## 🧪 Initial Test Plan
 
-- **Uji Daya Static & Dynamic:** Monitor tegangan 5V saat servo bergerak bergantian untuk memastikan tidak terjadi brownout.
-- **Verifikasi Antrian Servo:** Jalankan skrip yang memicu banyak perintah gerak dan pastikan servo selalu bergerak satu per satu.
-- **Tes Gestur ke Hotkey:** Simulasikan setiap gestur APDS-9960 dan pastikan backend memetakan ke hotkey OS yang benar.
-- **Pengujian Serial→WiFi Fallback:** Cabut kabel USB saat sistem berjalan untuk memastikan backend dan firmware berpindah ke mode WiFi tanpa crash.
-- **Latency Check UI:** Ukur waktu perubahan sensor ditampilkan di UI guna memastikan pengalaman responsif (&lt;200 ms target awal).
+- **Static & Dynamic Power Tests:** Monitor the 5V rail while servos move alternately to ensure there are no brownouts.
+- **Servo Queue Verification:** Run a script that triggers many movement commands and ensure servos always move one-by-one.
+- **Gesture to Hotkey Tests:** Simulate each APDS-9960 gesture and ensure the backend maps them to correct OS hotkeys.
+- **Serial→WiFi Fallback Test:** Unplug the USB cable while the system is running to ensure both backend and firmware switch to WiFi mode without crashing.
+- **UI Latency Check:** Measure the time for sensor changes to appear in the UI to ensure responsiveness (<200 ms initial target).
 
-## 🤝 Kontribusi
+## 🤝 Contributing
 
-1. Buka *issue* baru untuk setiap ide fitur atau temuan bug.
-2. Lampirkan referensi diagram atau log yang relevan agar diskusi terarah.
-3. Buat *pull request* dengan deskripsi singkat perubahan, langkah uji yang dijalankan, dan update checklist roadmap bila perlu.
+1. Open a new issue for each feature idea or bug found.
+2. Attach relevant diagrams or logs to keep discussions focused.
+3. Submit a pull request with a brief description of the changes, test steps performed, and update the roadmap checklist if needed.
 
-## 📄 Lisensi
+## 📄 License
 
-Lisensi belum ditentukan. Tambahkan berkas lisensi (mis. MIT/BSD) sebelum rilis publik agar hak distribusi jelas.
+License not yet determined. Add a license file (e.g., MIT/BSD) before public release to clarify distribution rights.

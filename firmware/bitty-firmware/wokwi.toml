@@ -1,0 +1,10 @@
+[simulation]
+firmware = ".pio/build/esp32doit-devkit-v1/firmware.bin"
+elf = ".pio/build/esp32doit-devkit-v1/firmware.elf"
+diagram = "diagram.json"
+
+[[simulation.console]]
+name = "UART0"
+type = "serial"
+uart = 0
+baud = 115200
