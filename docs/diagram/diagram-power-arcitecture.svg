@@ -1,0 +1,99 @@
+<svg width="1258pt" height="245pt" viewBox="0.00 0.00 1258.00 245.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 241)">
+<title>Arsitektur_Fisik_dan_Power</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-241 1253.58,-241 1253.58,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_laptop</title>
+<polygon fill="#f5f5f5" stroke="black" stroke-dasharray="5,2" points="8,-85 8,-168 148.92,-168 148.92,-85 8,-85"/>
+<text xml:space="preserve" text-anchor="middle" x="78.46" y="-151.4" font-family="Times,serif" font-size="14.00">Laptop Kamu</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_robot</title>
+<polygon fill="#fff9e6" stroke="black" stroke-dasharray="5,2" points="396.51,-8 396.51,-229 1241.58,-229 1241.58,-8 396.51,-8"/>
+<text xml:space="preserve" text-anchor="middle" x="819.05" y="-212.4" font-family="Times,serif" font-size="14.00">Di Dalam Robot</text>
+</g>
+<!-- USB_Port -->
+<g id="node1" class="node">
+<title>USB_Port</title>
+<polygon fill="#d3eaff" stroke="#d3eaff" points="140.92,-134.8 16,-134.8 16,-130.8 12,-130.8 12,-126.8 16,-126.8 16,-101.2 12,-101.2 12,-97.2 16,-97.2 16,-93.2 140.92,-93.2 140.92,-134.8"/>
+<polyline fill="none" stroke="#d3eaff" points="16,-130.8 20,-130.8 20,-126.8 16,-126.8"/>
+<polyline fill="none" stroke="#d3eaff" points="16,-101.2 20,-101.2 20,-97.2 16,-97.2"/>
+<text xml:space="preserve" text-anchor="middle" x="78.46" y="-118.2" font-family="Helvetica,sans-Serif" font-size="14.00">Port USB Laptop</text>
+<text xml:space="preserve" text-anchor="middle" x="78.46" y="-101.4" font-family="Helvetica,sans-Serif" font-size="14.00">(5V, 900mA max)</text>
+</g>
+<!-- MCU -->
+<g id="node2" class="node">
+<title>MCU</title>
+<path fill="#ffe0b2" stroke="#ffe0b2" d="M564.11,-134.8C564.11,-134.8 416.51,-134.8 416.51,-134.8 410.51,-134.8 404.51,-128.8 404.51,-122.8 404.51,-122.8 404.51,-105.2 404.51,-105.2 404.51,-99.2 410.51,-93.2 416.51,-93.2 416.51,-93.2 564.11,-93.2 564.11,-93.2 570.11,-93.2 576.11,-99.2 576.11,-105.2 576.11,-105.2 576.11,-122.8 576.11,-122.8 576.11,-128.8 570.11,-134.8 564.11,-134.8"/>
+<text xml:space="preserve" text-anchor="middle" x="490.31" y="-118.2" font-family="Helvetica,sans-Serif" font-size="14.00">ESP32 (Wemos D1 Mini)</text>
+<text xml:space="preserve" text-anchor="middle" x="490.31" y="-101.4" font-family="Helvetica,sans-Serif" font-size="14.00">Port USB</text>
+</g>
+<!-- USB_Port&#45;&gt;MCU -->
+<g id="edge4" class="edge">
+<title>USB_Port-&gt;MCU</title>
+<path fill="none" stroke="black" stroke-width="2" d="M152.7,-114C219.79,-114 319.55,-114 393.06,-114"/>
+<polygon fill="black" stroke="black" stroke-width="2" points="154.29,-110.5 144.29,-114 154.29,-117.5 154.29,-110.5"/>
+<polygon fill="black" stroke="black" stroke-width="2" points="391.14,-117.5 401.14,-114 391.14,-110.5 391.14,-117.5"/>
+<text xml:space="preserve" text-anchor="middle" x="272.72" y="-135" font-family="Helvetica,sans-Serif" font-size="14.00">   1x KABEL USB   </text>
+<text xml:space="preserve" text-anchor="middle" x="272.72" y="-118.2" font-family="Helvetica,sans-Serif" font-size="14.00"> (Membawa 5V Power + Data Serial)</text>
+</g>
+<!-- Capacitor -->
+<g id="node3" class="node">
+<title>Capacitor</title>
+<path fill="#ffcdd2" stroke="#ffcdd2" stroke-width="2" d="M880.56,-137.4C880.56,-140.27 847.5,-142.6 806.81,-142.6 766.12,-142.6 733.06,-140.27 733.06,-137.4 733.06,-137.4 733.06,-90.6 733.06,-90.6 733.06,-87.73 766.12,-85.4 806.81,-85.4 847.5,-85.4 880.56,-87.73 880.56,-90.6 880.56,-90.6 880.56,-137.4 880.56,-137.4"/>
+<path fill="none" stroke="#ffcdd2" stroke-width="2" d="M880.56,-137.4C880.56,-134.53 847.5,-132.2 806.81,-132.2 766.12,-132.2 733.06,-134.53 733.06,-137.4"/>
+<text xml:space="preserve" text-anchor="middle" x="806.81" y="-118.2" font-family="Helvetica,sans-Serif" font-size="14.00">KAPASITOR 1000µF</text>
+<text xml:space="preserve" text-anchor="middle" x="806.81" y="-101.4" font-family="Helvetica,sans-Serif" font-size="14.00">(Wajib!)</text>
+</g>
+<!-- MCU&#45;&gt;Capacitor -->
+<g id="edge1" class="edge">
+<title>MCU-&gt;Capacitor</title>
+<path fill="none" stroke="red" stroke-width="2" d="M576.42,-114C621.45,-114 676.55,-114 721.46,-114"/>
+<polygon fill="red" stroke="red" stroke-width="2" points="730.21,-114 720.21,-118.5 727.65,-114.5 720.21,-114.5 720.21,-114 720.21,-113.5 727.65,-113.5 720.21,-109.5 730.21,-114"/>
+<text xml:space="preserve" text-anchor="middle" x="654.58" y="-118.2" font-family="Times,serif" font-size="14.00">  5V dari VBUS USB</text>
+</g>
+<!-- Servos_4 -->
+<g id="node4" class="node">
+<title>Servos_4</title>
+<path fill="#ffe0b2" stroke="#ffe0b2" d="M1052.99,-53C1052.99,-53 1191.24,-53 1191.24,-53 1197.24,-53 1203.24,-59 1203.24,-65 1203.24,-65 1203.24,-77 1203.24,-77 1203.24,-83 1197.24,-89 1191.24,-89 1191.24,-89 1052.99,-89 1052.99,-89 1046.99,-89 1040.99,-83 1040.99,-77 1040.99,-77 1040.99,-65 1040.99,-65 1040.99,-59 1046.99,-53 1052.99,-53"/>
+<text xml:space="preserve" text-anchor="middle" x="1122.12" y="-66.9" font-family="Helvetica,sans-Serif" font-size="14.00">4x Servo (VCC &amp; GND)</text>
+</g>
+<!-- MCU&#45;&gt;Servos_4 -->
+<g id="edge5" class="edge">
+<title>MCU-&gt;Servos_4</title>
+<path fill="none" stroke="blue" stroke-dasharray="5,2" d="M546.46,-92.7C594.81,-75.24 667.43,-51.91 733.06,-42.4 833.9,-27.78 950.62,-40.32 1029.51,-53.08"/>
+<polygon fill="blue" stroke="blue" points="1028.94,-56.54 1039.37,-54.72 1030.08,-49.63 1028.94,-56.54"/>
+<text xml:space="preserve" text-anchor="middle" x="806.81" y="-63.4" font-family="Times,serif" font-size="14.00"> Sinyal PWM</text>
+<text xml:space="preserve" text-anchor="middle" x="806.81" y="-46.6" font-family="Times,serif" font-size="14.00"> (Satu per satu!)</text>
+</g>
+<!-- Sensors -->
+<g id="node5" class="node">
+<title>Sensors</title>
+<path fill="#ffe0b2" stroke="#ffe0b2" d="M1022.65,-123.2C1022.65,-123.2 1221.58,-123.2 1221.58,-123.2 1227.58,-123.2 1233.58,-129.2 1233.58,-135.2 1233.58,-135.2 1233.58,-152.8 1233.58,-152.8 1233.58,-158.8 1227.58,-164.8 1221.58,-164.8 1221.58,-164.8 1022.65,-164.8 1022.65,-164.8 1016.65,-164.8 1010.65,-158.8 1010.65,-152.8 1010.65,-152.8 1010.65,-135.2 1010.65,-135.2 1010.65,-129.2 1016.65,-123.2 1022.65,-123.2"/>
+<text xml:space="preserve" text-anchor="middle" x="1122.12" y="-148.2" font-family="Helvetica,sans-Serif" font-size="14.00">Semua Sensor (VCC &amp; GND)</text>
+<text xml:space="preserve" text-anchor="middle" x="1122.12" y="-131.4" font-family="Helvetica,sans-Serif" font-size="14.00">(OLED, APDS, DHT11, Mic, Spk)</text>
+</g>
+<!-- MCU&#45;&gt;Sensors -->
+<g id="edge6" class="edge">
+<title>MCU-&gt;Sensors</title>
+<path fill="none" stroke="blue" stroke-dasharray="5,2" d="M587.57,-133.91C589.77,-134.28 591.95,-134.65 594.11,-135 769.09,-163.53 815.45,-157.51 992.65,-152 994.74,-151.94 996.85,-151.86 998.97,-151.79"/>
+<polygon fill="blue" stroke="blue" points="588.42,-130.5 577.97,-132.21 587.2,-137.4 588.42,-130.5"/>
+<polygon fill="blue" stroke="blue" points="999.06,-155.29 1008.91,-151.39 998.78,-148.29 999.06,-155.29"/>
+<text xml:space="preserve" text-anchor="middle" x="806.81" y="-160.82" font-family="Times,serif" font-size="14.00"> Sinyal I2C/I2S/Digital</text>
+</g>
+<!-- Capacitor&#45;&gt;Servos_4 -->
+<g id="edge2" class="edge">
+<title>Capacitor-&gt;Servos_4</title>
+<path fill="none" stroke="red" stroke-width="2" d="M880.87,-103.97C925.24,-97.88 982.27,-90.06 1029.62,-83.56"/>
+<polygon fill="red" stroke="red" stroke-width="2" points="1038.09,-82.4 1028.79,-88.21 1035.62,-83.24 1028.25,-84.25 1028.18,-83.76 1028.11,-83.26 1035.48,-82.25 1027.57,-79.3 1038.09,-82.4"/>
+<text xml:space="preserve" text-anchor="middle" x="945.6" y="-105.49" font-family="Times,serif" font-size="14.00">  Jalur 5V Power</text>
+</g>
+<!-- Capacitor&#45;&gt;Sensors -->
+<g id="edge3" class="edge">
+<title>Capacitor-&gt;Sensors</title>
+<path fill="none" stroke="red" stroke-width="2" d="M880.87,-121C916.15,-124.37 959.43,-128.52 999.49,-132.35"/>
+<polygon fill="red" stroke="red" stroke-width="2" points="1007.99,-133.17 997.61,-136.69 1005.39,-133.42 997.99,-132.71 998.04,-132.21 998.09,-131.72 1005.49,-132.43 998.47,-127.74 1007.99,-133.17"/>
+<text xml:space="preserve" text-anchor="middle" x="945.6" y="-135.89" font-family="Times,serif" font-size="14.00">  Jalur 5V Power</text>
+</g>
+</g>
+</svg>

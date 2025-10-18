@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+.env
+.env.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# VSCode
+.vscode/
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Node / Frontend
+node_modules/
+.dist/
+.build/
+dist/
+build/
+.next/
+out/
+coverage/
+.eslintcache
+*.log
+
+# Vercel / deployment
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.fleet/

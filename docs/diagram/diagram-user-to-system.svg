@@ -1,0 +1,80 @@
+<svg width="372pt" height="373pt" viewBox="0.00 0.00 372.00 373.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 369)">
+<title>Alur_Aktif_User_Ke_Sistem</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-369 368.01,-369 368.01,4 -4,4"/>
+<!-- User -->
+<g id="node1" class="node">
+<title>User</title>
+<ellipse fill="#e0e0e0" stroke="#e0e0e0" cx="108.18" cy="-347" rx="31.43" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="108.18" y="-342.8" font-family="Helvetica,sans-Serif" font-size="14.00">User</text>
+</g>
+<!-- UI -->
+<g id="node2" class="node">
+<title>UI</title>
+<path fill="#d3eaff" stroke="#d3eaff" d="M173.43,-259.4C173.43,-259.4 42.94,-259.4 42.94,-259.4 36.94,-259.4 30.94,-253.4 30.94,-247.4 30.94,-247.4 30.94,-235.4 30.94,-235.4 30.94,-229.4 36.94,-223.4 42.94,-223.4 42.94,-223.4 173.43,-223.4 173.43,-223.4 179.43,-223.4 185.43,-229.4 185.43,-235.4 185.43,-235.4 185.43,-247.4 185.43,-247.4 185.43,-253.4 179.43,-259.4 173.43,-259.4"/>
+<text xml:space="preserve" text-anchor="middle" x="108.18" y="-237.2" font-family="Helvetica,sans-Serif" font-size="14.00">Frontend UI (Electron)</text>
+</g>
+<!-- User&#45;&gt;UI -->
+<g id="edge1" class="edge">
+<title>User-&gt;UI</title>
+<path fill="none" stroke="black" d="M76.95,-344.18C53.93,-341.01 24.05,-332.66 8.71,-311 0.08,-298.81 0.08,-289.59 8.71,-277.4 12.28,-272.36 16.64,-268.04 21.52,-264.33"/>
+<polygon fill="black" stroke="black" points="23.04,-267.52 29.52,-259.14 19.23,-261.65 23.04,-267.52"/>
+<text xml:space="preserve" text-anchor="middle" x="97.95" y="-298.4" font-family="Times,serif" font-size="14.00"> 1. Memulai Aksi</text>
+<text xml:space="preserve" text-anchor="middle" x="97.95" y="-281.6" font-family="Times,serif" font-size="14.00"> (misal: klik 'Ekspresi Senyum')</text>
+</g>
+<!-- UI&#45;&gt;User -->
+<g id="edge6" class="edge">
+<title>UI-&gt;User</title>
+<path fill="none" stroke="black" d="M168.34,-259.74C175.79,-264.32 182.44,-270.11 187.18,-277.4 195.33,-289.92 195.33,-298.48 187.18,-311 178.58,-324.23 163.71,-332.49 149.17,-337.64"/>
+<polygon fill="black" stroke="black" points="148.21,-334.28 139.68,-340.56 150.27,-340.97 148.21,-334.28"/>
+<text xml:space="preserve" text-anchor="middle" x="268.33" y="-298.4" font-family="Times,serif" font-size="14.00"> 6. Tampilkan Notifikasi</text>
+<text xml:space="preserve" text-anchor="middle" x="268.33" y="-281.6" font-family="Times,serif" font-size="14.00"> (misal: 'Ekspresi diubah!')</text>
+</g>
+<!-- UI&#45;&gt;UI -->
+<g id="edge2" class="edge">
+<title>UI-&gt;UI</title>
+<path fill="none" stroke="black" d="M185.92,-250.18C196.43,-248.71 203.43,-245.78 203.43,-241.4 203.43,-238.87 201.09,-236.82 197.09,-235.26"/>
+<polygon fill="black" stroke="black" points="197.93,-231.86 187.39,-232.97 196.32,-238.67 197.93,-231.86"/>
+<text xml:space="preserve" text-anchor="middle" x="283.72" y="-245.6" font-family="Times,serif" font-size="14.00"> 2. Respon Instan UI</text>
+<text xml:space="preserve" text-anchor="middle" x="283.72" y="-228.8" font-family="Times,serif" font-size="14.00"> (tombol 'Senyum' jadi aktif)</text>
+</g>
+<!-- Sistem -->
+<g id="node3" class="node">
+<title>Sistem</title>
+<path fill="#d0f4d0" stroke="#d0f4d0" d="M204.37,-153.8C204.37,-153.8 12,-153.8 12,-153.8 6,-153.8 0,-147.8 0,-141.8 0,-141.8 0,-124.2 0,-124.2 0,-118.2 6,-112.2 12,-112.2 12,-112.2 204.37,-112.2 204.37,-112.2 210.37,-112.2 216.37,-118.2 216.37,-124.2 216.37,-124.2 216.37,-141.8 216.37,-141.8 216.37,-147.8 210.37,-153.8 204.37,-153.8"/>
+<text xml:space="preserve" text-anchor="middle" x="108.18" y="-137.2" font-family="Helvetica,sans-Serif" font-size="14.00">Sistem</text>
+<text xml:space="preserve" text-anchor="middle" x="108.18" y="-120.4" font-family="Helvetica,sans-Serif" font-size="14.00">(Backend Python + Robot MCU)</text>
+</g>
+<!-- UI&#45;&gt;Sistem -->
+<g id="edge3" class="edge">
+<title>UI-&gt;Sistem</title>
+<path fill="none" stroke="black" d="M36.02,-223.03C28.44,-218.46 21.69,-212.69 16.67,-205.4 8.21,-193.1 8.37,-184.21 16.67,-171.8 19.36,-167.78 22.56,-164.19 26.13,-160.98"/>
+<polygon fill="black" stroke="black" points="28.04,-163.93 33.86,-155.08 23.79,-158.37 28.04,-163.93"/>
+<text xml:space="preserve" text-anchor="middle" x="97.93" y="-192.8" font-family="Times,serif" font-size="14.00"> 3. Kirim Perintah</text>
+<text xml:space="preserve" text-anchor="middle" x="97.93" y="-176" font-family="Times,serif" font-size="14.00"> (via HTTP/WS ke Backend)</text>
+</g>
+<!-- Sistem&#45;&gt;UI -->
+<g id="edge5" class="edge">
+<title>Sistem-&gt;UI</title>
+<path fill="none" stroke="black" d="M162.07,-154.15C168.88,-158.92 174.94,-164.74 179.18,-171.8 186.87,-184.6 187.07,-192.72 179.18,-205.4 176.65,-209.47 173.49,-213.08 169.92,-216.28"/>
+<polygon fill="black" stroke="black" points="168.05,-213.31 162.16,-222.12 172.26,-218.9 168.05,-213.31"/>
+<text xml:space="preserve" text-anchor="middle" x="248.79" y="-192.8" font-family="Times,serif" font-size="14.00"> 5. Kirim Balasan 'OK'</text>
+<text xml:space="preserve" text-anchor="middle" x="248.79" y="-176" font-family="Times,serif" font-size="14.00"> (opsional, tapi bagus)</text>
+</g>
+<!-- Robot_Fisik -->
+<g id="node4" class="node">
+<title>Robot_Fisik</title>
+<polygon fill="#ffe0b2" stroke="#ffe0b2" points="54.28,-0.5 54.28,-42.1 162.08,-42.1 162.08,-0.5 54.28,-0.5"/>
+<text xml:space="preserve" text-anchor="middle" x="108.18" y="-25.5" font-family="Helvetica,sans-Serif" font-size="14.00">Robot Fisik</text>
+<text xml:space="preserve" text-anchor="middle" x="108.18" y="-8.7" font-family="Helvetica,sans-Serif" font-size="14.00">(Servo, OLED)</text>
+</g>
+<!-- Sistem&#45;&gt;Robot_Fisik -->
+<g id="edge4" class="edge">
+<title>Sistem-&gt;Robot_Fisik</title>
+<path fill="none" stroke="black" d="M108.18,-111.88C108.18,-95.57 108.18,-72.29 108.18,-53.55"/>
+<polygon fill="black" stroke="black" points="111.68,-53.81 108.18,-43.81 104.68,-53.81 111.68,-53.81"/>
+<text xml:space="preserve" text-anchor="middle" x="203.62" y="-81.6" font-family="Times,serif" font-size="14.00"> 4. Eksekusi Perintah</text>
+<text xml:space="preserve" text-anchor="middle" x="203.62" y="-64.8" font-family="Times,serif" font-size="14.00"> (Servo bergerak, OLED berubah)</text>
+</g>
+</g>
+</svg>
